@@ -1,23 +1,46 @@
-import java.net.InetSocketAddress;
-import java.net.Socket;
+//input a URL address and get the IP address of that URL
+
+import java.util.Scanner;
+import java.net.*;
+import java.io.*;
+
+public class IPfinder {
 
 
-public class PortScanner {
-
-	public static void main(String args[]){
-		PortScanner portScan = new PortScanner();
+	public static void main(String args[])
+	{
+		new IPfinder();
 	}
-
-	public PortScanner(){
-		for (int port = 1; port <= 65535; port++) {
-			try {
-				Socket socket = new Socket();
-				socket.connect(new InetSocketAddress("ec2-54-154-71-184.eu-west-1.compute.amazonaws.com", port), 1000);
-				socket.close();
-				System.out.println("Port " + port + " is open");
-			} catch (Exception ex) {
-			}
+	// DATA
+	//............................................................
+	private Scanner someInput;
+	// CONSTRUCTORS
+	//............................................................
+	public IPfinder()
+	{
+		this.someInput = new Scanner(System.in);
+		getAddress();
+		//pause before exit
+		System.out.println(" \n Press enter to exit the program");
+		this.someInput.nextLine();
+		//close the program without error
+		System.exit(0);
+	}
+	//............................................................
+	private void getAddress()
+	{
+		String host;
+		System.out.print("\n\nEnter host name: ");
+		host = this.someInput.nextLine();
+		try
+		{
+			InetAddress address = InetAddress.getByName(host);
+			System.out.println("IP address: " + address.toString());
+		}
+		catch (UnknownHostException e)
+		{
+			System.out.println("Could not find " + host);
 		}
 	}
-}
+}//EOC
 
