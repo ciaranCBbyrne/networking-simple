@@ -1,0 +1,44 @@
+/* Look up the IP address of this host
+	*****************************************************************/
+	import java.util.Scanner;
+	import java.net.*;
+	import java.io.*;
+public class HostIPAddress {
+	
+	
+		public static void main(String args[])
+		{
+			HostIPAddress anApp = new HostIPAddress();
+		}
+		//............................................................
+		//declare objects
+		private Scanner someInput;
+		// CONSTRUCTORS
+		//............................................................
+		public HostIPAddress
+		()
+		{
+			this.someInput = new Scanner(System.in);
+			getLocalAddress();
+			//pause before exit
+			System.out.println(" \n Press enter to exit the program");
+			this.someInput.nextLine();
+			//close the program without error
+			System.exit(0);
+		}
+		//............................................................
+		private void getLocalAddress()
+		{
+			System.out.println ("Looking up the IP address of the local host");
+			try
+			{
+				// Get the local host
+				InetAddress localAddress = InetAddress.getLocalHost();
+				System.out.println("IP address of this machine: " +localAddress.getHostAddress());
+			}
+			catch (UnknownHostException uhe)
+			{
+				System.out.println ("Error - unable to resolve localhost");
+			}
+		}
+	}//EOC
